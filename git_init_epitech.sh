@@ -5,7 +5,7 @@
 ## Login   <devill_x@epitech.net>
 ## 
 ## Started on  Tue Mar  4 18:35:19 2014 devill_x
-## Last update Tue Mar  4 19:22:24 2014 devill_x
+## Last update Thu Mar 13 08:58:47 2014 devill_x
 ##
 
 #######################################################
@@ -38,13 +38,23 @@
 
 USER_GIT=$USER
 
+## PASSWORD: votre password unix
+##
+## Remplacer password par votre password unix
+##
+## Exemple: si votre password est toto42 la ligne sera:
+## PASSWORD="toto42"
+
+PASSWORD="password"
+SEND_PASS="`echo -n "$PASSWORD" | sha512sum | cut -f1 -d' '`"
+
 if [ $# -eq 1 ]
     then
     ## Création du dépot sur le serveur
-    blih repository create $1
-    
+    blih -t $SEND_PASS repository create $1
+
     ## Set des droits pour le ramassage
-    blih repository setacl $1 ramassage-tek r
+    blih -t $SEND_PASS repository setacl $1 ramassage-tek r
 
     ## Clone du dépot
     git clone $USER_GIT@git.epitech.eu:/$USER_GIT/$1
