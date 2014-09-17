@@ -5,7 +5,7 @@
 ## Login   <devill_x@epitech.net>
 ## 
 ## Started on  Tue Mar  4 18:35:19 2014 devill_x
-## Last update Thu Mar 13 08:58:47 2014 devill_x
+## Last update Wed Sep 17 20:39:14 2014 vaur
 ##
 
 #######################################################
@@ -48,13 +48,23 @@ USER_GIT=$USER
 PASSWORD="password"
 SEND_PASS="`echo -n "$PASSWORD" | sha512sum | cut -f1 -d' '`"
 
+## BLIH: la commande pour lancer blih
+##
+## si vous utilisez le dump epitech:
+## BLIH="blih"
+##
+## si vous utilisez un autre dump:
+## BLIH="python3.3 /chemin/vers/blih"
+
+BLIH="blih"
+
 if [ $# -eq 1 ]
     then
     ## Création du dépot sur le serveur
-    blih -t $SEND_PASS repository create $1
+    $BLIH -u $USER_GIT -t $SEND_PASS repository create $1
 
     ## Set des droits pour le ramassage
-    blih -t $SEND_PASS repository setacl $1 ramassage-tek r
+    $BLIH -u $USER_GIT -t $SEND_PASS repository setacl $1 ramassage-tek r
 
     ## Clone du dépot
     git clone $USER_GIT@git.epitech.eu:/$USER_GIT/$1
